@@ -15,6 +15,8 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     private let vkSdk: VKSdk
     private var loginWindow: UIWindow? // Окно входа
     
+    private var tokenCallBack: ((_ accessToken: String) -> Void)?
+    
     override init() {
         vkSdk = VKSdk.initialize(withAppId: appId)
         super.init() 
@@ -23,12 +25,19 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
         vkSdk.uiDelegate = self
     }
     
+    var token: String? {
+        return VKSdk.accessToken()?.accessToken
+    }
+    
     
     // MARK:- Права доступа для токена пользователя
     
-    func wakeUpSession() {
+    func wakeUpSession(_ completion: @escaping (_ accessToken: String?) -> Void) {
+        tokenCallBack = completion // Вовзрат token когда прошли авторизацию
        
-        let scope = ["offline"]
+        let scope = ["friends, wall"]
+        
+//        VKSdk.forceLogout()
         
         VKSdk.wakeUpSession(scope) { (state, error) in
             switch state { // state - нынешнее состояние
@@ -37,7 +46,9 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
                 VKSdk.authorize(scope)
             case .authorized:
                 print("authorized")
+                completion(VKSdk.accessToken().accessToken)
             default:
+                completion(nil)
                 fatalError(error!.localizedDescription)
             }
         }
@@ -48,6 +59,7 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) { // Авторизация доступа успешно завершена
         print(#function)
+        tokenCallBack?(result.token.accessToken)
     }
     
     func vkSdkUserAuthorizationFailed() { // Авторизация пользователя не удалась

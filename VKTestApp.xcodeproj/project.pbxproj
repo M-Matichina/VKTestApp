@@ -15,6 +15,11 @@
 		22844530246EA44B0013D737 /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2284452E246EA44B0013D737 /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22844533246EB1C70013D737 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22844532246EB1C70013D737 /* AuthService.swift */; };
 		22844535246ECD590013D737 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2284451E246E963C0013D737 /* Auth.storyboard */; };
+		22E361EE247174010036C04C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E361ED247174010036C04C /* NetworkService.swift */; };
+		22E361F0247177B50036C04C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E361EF247177B50036C04C /* API.swift */; };
+		22E361F2247189CC0036C04C /* NewsFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E361F1247189CC0036C04C /* NewsFeedController.swift */; };
+		22E361F52471C1C10036C04C /* NewsFeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E361F42471C1C10036C04C /* NewsFeedResponse.swift */; };
+		22E361F72471D9A50036C04C /* NetworkingNewsFeedFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E361F62471D9A50036C04C /* NetworkingNewsFeedFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +46,11 @@
 		22844526246E96430013D737 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2284452E246EA44B0013D737 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VKSdkFramework.framework; path = Carthage/Build/iOS/VKSdkFramework.framework; sourceTree = "<group>"; };
 		22844532246EB1C70013D737 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		22E361ED247174010036C04C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		22E361EF247177B50036C04C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		22E361F1247189CC0036C04C /* NewsFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedController.swift; sourceTree = "<group>"; };
+		22E361F42471C1C10036C04C /* NewsFeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedResponse.swift; sourceTree = "<group>"; };
+		22E361F62471D9A50036C04C /* NetworkingNewsFeedFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingNewsFeedFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				22844518246E963C0013D737 /* AppDelegate.swift */,
-				22844532246EB1C70013D737 /* AuthService.swift */,
-				2284451C246E963C0013D737 /* AuthViewController.swift */,
-				2284451E246E963C0013D737 /* Auth.storyboard */,
+				22E361F3247189EC0036C04C /* NewsFeedController */,
+				22E361EB247173AD0036C04C /* AuthController */,
+				22E361EC247173BE0036C04C /* Services */,
 				22844521246E96420013D737 /* Assets.xcassets */,
 				22844523246E96420013D737 /* LaunchScreen.storyboard */,
 				22844526246E96430013D737 /* Info.plist */,
@@ -92,6 +102,36 @@
 				2284452E246EA44B0013D737 /* VKSdkFramework.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22E361EB247173AD0036C04C /* AuthController */ = {
+			isa = PBXGroup;
+			children = (
+				2284451C246E963C0013D737 /* AuthViewController.swift */,
+				2284451E246E963C0013D737 /* Auth.storyboard */,
+			);
+			path = AuthController;
+			sourceTree = "<group>";
+		};
+		22E361EC247173BE0036C04C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				22844532246EB1C70013D737 /* AuthService.swift */,
+				22E361EF247177B50036C04C /* API.swift */,
+				22E361ED247174010036C04C /* NetworkService.swift */,
+				22E361F42471C1C10036C04C /* NewsFeedResponse.swift */,
+				22E361F62471D9A50036C04C /* NetworkingNewsFeedFetcher.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		22E361F3247189EC0036C04C /* NewsFeedController */ = {
+			isa = PBXGroup;
+			children = (
+				22E361F1247189CC0036C04C /* NewsFeedController.swift */,
+			);
+			name = NewsFeedController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,9 +228,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E361F2247189CC0036C04C /* NewsFeedController.swift in Sources */,
+				22E361F52471C1C10036C04C /* NewsFeedResponse.swift in Sources */,
+				22E361F72471D9A50036C04C /* NetworkingNewsFeedFetcher.swift in Sources */,
 				2284451D246E963C0013D737 /* AuthViewController.swift in Sources */,
 				22844519246E963C0013D737 /* AppDelegate.swift in Sources */,
+				22E361EE247174010036C04C /* NetworkService.swift in Sources */,
 				22844533246EB1C70013D737 /* AuthService.swift in Sources */,
+				22E361F0247177B50036C04C /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
