@@ -17,14 +17,29 @@ class AuthViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         authService = AuthService()
-        authService.wakeUpSession { [weak self] (accessToken) in 
-            guard let strongSelf = self else { return }
-            
+        authService.wakeUpSession { (accessToken) in
             if accessToken != nil {
-                let newsFeedVC = NewsFeedViewController()
-                newsFeedVC.modalPresentationStyle = .fullScreen
-                strongSelf.navigationController?.pushViewController(newsFeedVC, animated: true)
+                
+                // MARK: Переход на NewsFeedController, который находится на storyboard NewsFeedViewController
+                
+                let storyboard = UIStoryboard(name: "NewsFeed", bundle: nil)
+                let controller = storyboard.instantiateViewController(identifier: "NewsFeedViewController")
+                controller.modalPresentationStyle = .fullScreen
+                
+                guard let window = UIApplication.shared.keyWindow else {
+                    return
+                }
+                
+                let root = UINavigationController()
+                root.viewControllers = [controller]
+                
+                UIView.transition(with: window, duration: 0.0, options: .transitionCrossDissolve, animations: {
+                    window.rootViewController = root
+                }, completion: nil)
+                
             } else {
                 print(Error.self)
             }

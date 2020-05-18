@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DataFetcher {
-    func getNewsFeed(response: @escaping (NewsFeedResponse?) -> Void)
+    func getNewsFeed(startFrom: String?, response: @escaping (NewsFeedResponse?) -> Void)
 }
 
 struct NetworkingNewsFeedFetcher: DataFetcher {
@@ -21,8 +21,16 @@ struct NetworkingNewsFeedFetcher: DataFetcher {
     }
     
     
-    func getNewsFeed(response: @escaping (NewsFeedResponse?) -> Void) {
-        let params = ["filters": "post"]
+    func getNewsFeed(startFrom: String?, response: @escaping (NewsFeedResponse?) -> Void) {
+        var params = [
+            "filters": "post",
+            "count": "15"
+        ]
+        
+        if let startFrom = startFrom {
+            params["start_from"] = startFrom
+        }
+        
         networking.request(path: API.host, params: params) { (data, error) in
             if let error = error {
                 print(error.localizedDescription)

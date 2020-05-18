@@ -17,14 +17,20 @@ struct NewsFeedResponseWrapped: Decodable {
 }
 
 struct NewsFeedResponse: Decodable {
-    let items: [NewsFeedItem] // Массив новостей для текущего пользователя
-    
+    var items: [NewsFeedItem] // Массив новостей для текущего пользователя
+    var nextFrom: String?
 }
 
 struct NewsFeedItem: Decodable {
-    let date: Double
+    let sourceId: Int 
     let text: String?
     let attachments: [Attachment]?
+    
+    var postType: String {
+        get {
+            return sourceId >= 0 ? "Пост пользователя" : "Пост группы"
+        }
+    }
 }
 
 struct Attachment: Decodable {
@@ -40,3 +46,4 @@ struct SizePhoto: Decodable {
     let type: String
     let url: String
 }
+
